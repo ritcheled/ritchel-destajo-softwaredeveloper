@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Display Channel Videos</title>
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./style.css" />
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button class = "show" @click="get_channel()">Show Channel Data</button>
+        <header> 
+            <h1> <img class="pic" :src= "tnail.url" alt="photo"> {{channel.title}} </h1>
+            <p> {{channel.description}}</p>
+        </header>
+        <table class="box">
+            <tr>
+                <th>Count</th>
+                <th>Link</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+            <tr v-for="(video, index) in videos.items" :key="video.id.videoId">
+                <td>{{index+1}}</td>
+                <td><a :href ="getYTUrl(video.id.videoId)" :title="video.id.videoId" target="_blank"><img :src = "video.snippet.thumbnails.default.url" alt="Youtube Video"></a></td>
+                <td>{{video.snippet.title}}</td>
+                <td>{{video.snippet.description}}</td>
+            </tr>
+        </table>
+        <button @click="get_pg(active_pg-1)">Prev</button>
+        <button @click="get_pg(1)">1</button>
+        <button @click="get_pg(2)">2</button>
+        <button @click="get_pg(3)">3</button>
+        <button @click="get_pg(4)">4</button>
+        <button @click="get_pg(5)">5</button>
+        <button @click="get_pg(active_pg+1)">Next</button>
+    </div>
+
+    <!-- Import Js -->
+    <script src="./main1.js"></script>
+    <script> const mountedApp = app.mount('#app')</script>
+</body>
+</html>
